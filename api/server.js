@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require ('mongoose');
 const app = express();
 dotenv.config();
-
+mongoose.set("strictQuery", true);
 
 try{
      mongoose.connect(process.env.MONGODB_URI)

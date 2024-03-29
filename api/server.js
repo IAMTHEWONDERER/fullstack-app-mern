@@ -4,11 +4,13 @@ const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
 
-try{
-     mongoose.connect(process.env.MONGODB_URI)
-    console.log('connected to db')
+const connect = async()=>{
+    try{
+        mongoose.connect(process.env.MONGODB_URI)
+        console.log('connected to db')
+        }
+    catch(err){
+        res.status(500).send({message: err.message});
     }
-catch(err){
-    res.status(500).send({message: err.message});
-}
+};
 app.listen(5656,()=>{console.log("backend server is running")})

@@ -48,4 +48,11 @@ app.use("api/orders", orderRoute);
 app.use("api/reviews", reviewRoute);
 app.use("api/messages", messageRoute);
 app.use("api/conversations", conversationRoute);
+
+app.use((err,req,res,next)=>{
+    const errStatus= err.status || 500;
+    const errMessage= err.message || 'something went wrong';
+    return res.status(errStatus).send(errMessage);
+
+})
 app.listen(5656,()=>{console.log("backend server is running")})

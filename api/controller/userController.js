@@ -1,15 +1,16 @@
+import User from '../models/userModel'
 
- 
 
-
-export const deleteUser = (req,res)=>{
-    const {userId} = req.params;
-    User.findOneAndDelete({_id:userId},(err,user)=>{
-        if(err){
-            res.status(500).send({message: err.message});
-        }
-        else{
-            res.status(200).send(user);
-        }
+export const deleteUser = async (req,res)=>{
+    const user = await User.findById(req.params.id);
+    const token = req.cookies.accessToken;
+    if(!token) 
+    {return res.status(401).send("you are not authenticated")};
+    jwt.verify(token, process.env.JWT_SECRET, async (err, payload)=>{
+     if(payload.id !== user._id){
+        return res.status(403).send("you can delete only your account")
+     }
     })
+
+    await User.findOneAndDelete(req.params.id);
 }

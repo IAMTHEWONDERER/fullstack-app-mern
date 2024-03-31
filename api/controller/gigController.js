@@ -59,6 +59,7 @@ export const getGigs = async (req,res,next)=>{
         }
         res.status(200).json(gigs);
     }
+    
     catch(err){
         next(err);
     }

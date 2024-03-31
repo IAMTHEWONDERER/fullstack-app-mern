@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require ('mongoose');
-
+const cors = require('cors');
 
 
 
@@ -25,7 +25,7 @@ const dotenv = require('dotenv');
 
 app.use(express.json());
 app.use(cookieParser())
-
+app.use(cors({origin:"http://localhost:5173", credential: true}));
 
 
 mongoose.set("strictQuery", true);
